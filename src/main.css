@@ -1,0 +1,23 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+.main{
+    height: 100vh;
+    width: 100vw;
+    background-image: url('assets/bgs/desktop.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+@media (max-width:1024px) and (min-width:482px){
+    .main{
+        background-image: url('assets/bgs/ipad.jpg');
+    }
+}
+@media (max-width:481px){
+    .main{
+        background-image: url('assets/bgs/phone.jpg');
+    }
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Card from './Card';
 import Time from './Time';
-import logo from '../public/ramadan.svg';
+import { ReactComponent as MenuIcon } from '../public/ramadan.svg'
 function App() {
   const [city,setCity]=useState('Hebron');
   const [date,setDate]=useState('');
@@ -38,7 +38,7 @@ function App() {
     <div className='main'>
     <div className="nav">
       <div className="icon">
-        <img src={logo}/>
+        <MenuIcon />
       </div>
       <div className="date">{date}</div>
       <div className="slide">

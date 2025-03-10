@@ -35,6 +35,21 @@ function App() {
   },[city])
   return (
     <div className='main'>
+    <div className="nav">
+      <div className="icon">
+        <img src='../public/ramadan.svg'/>
+      </div>
+      <div className="date">{date}</div>
+      <div className="slide">
+        <select onChange={(e)=>{let x = e.target.value;setCity(x);console.log(city)}}>
+          <option value={'Hebron'}>hebron</option>
+          <option value={'Jerusalem'}>Jerusalem</option>
+          <option value={'Ramallah'}>Ramallah</option>
+          <option value={'Nablus'}>Nablus</option>
+          <option value={'Bethlehem'}>Bethlehem</option>
+        </select>
+      </div>
+    </div>
       <div className="container">
           <div className="one">
             <h1>Select Your City:</h1>

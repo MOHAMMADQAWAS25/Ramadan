@@ -14,19 +14,9 @@
     justify-content: center;
     align-items: center;
 }
-@media (max-width:1024px) and (min-width:482px){
-    .main{
-        background-image: url('assets/bgs/ipad.jpg');
-    }
-}
-@media (max-width:481px){
-    .main{
-        background-image: url('assets/bgs/phone.jpg');
-    }
-}
 .container{
     width:90vw;
-    height: 90vh;
+    height: 90%;
     display: flex;
     background-color: rgba(0,0,0,0.2);
     border-radius: 10px;
@@ -65,7 +55,7 @@ option{
 }
 .two
 {
-    width: 75%;
+    min-width: 75%;
     height: 100%;
     background-color: rgba(0,0,0,0.2);
     display: flex;
@@ -119,4 +109,73 @@ option{
     font-size: 3vw;
     font-weight: bold;
     color: #DCDE8F;
+}
+.nav{
+    display: none;
+}
+@media (max-width:1024px) and (min-width:482px){
+    .main{
+        background-image: url('assets/bgs/ipad.jpg');
+    }
+}
+@media (max-width:481px){
+    *{
+        padding:0;
+        margin:0;
+    }
+    .main{
+        background-image: url('assets/bgs/phone.jpg');
+        flex-direction: column;
+        justify-content: space-between;
+        row-gap: 5px;
+    }
+    .container{
+        width: 100%;
+    }
+    .one{
+        display: none;
+    }
+    .two{
+        width: 100%;
+    }
+    .DateTime{
+        display: none;
+    }
+    .Times{
+        height: 100%;
+    }
+    .name , .time{
+        font-size: 30px;
+    } 
+    .nav{
+        display: block;
+        background-color: rgba(0,0,0,0.3);
+        backdrop-filter: blur(20px);
+        height: 7%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding:10px;
+    }
+    .icon{
+        padding-top:10px;
+    }
+    .card{
+        display: flex;
+        align-items: center;
+    }
+    .date{
+        color: white;
+    }
+    .slide select{
+        min-width: 100px;
+        font-size: 15px;
+        background-color: #ffd700;
+        color: white;
+        border: 0;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 5px;
+    }
 }

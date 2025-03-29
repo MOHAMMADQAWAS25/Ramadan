@@ -9,7 +9,7 @@ function App() {
   const [city,setCity]=useState('Hebron');
   const [date,setDate]=useState('');
   const [times,setTimes]=useState({});
-  const [names,setNames]=useState(["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Sunset", "Isha"]);
+  const [names,setNames]=useState(["Fajr", "Sunrise", "Dhuhr", "Asr", , "Sunset","Maghrib", "Isha"]);
   useEffect(()=>{
     let x = new Date();
     x=x.toString();

@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Card from './Card';
 import Time from './Time';
-import { ReactComponent as MenuIcon } from '../public/ramadan.svg'
+import MenuIcon  from '../public/ramadan.svg'
+import loadingIcon from '../public/loading.svg';
 function App() {
+  const Control=useRef(null);
+  const [loading,setLoading]=useState(true);
   const [city,setCity]=useState('Hebron');
   const [date,setDate]=useState('');
   const [times,setTimes]=useState({});
@@ -15,7 +18,15 @@ function App() {
     setDate(x);
   },[])
   useEffect(()=>{
-    console.log(city);
+    if(loading){
+      Control.current.style.display='flex';
+    }
+    else{
+      Control.current.style.display='none';
+    }
+  },[loading])
+  useEffect(()=>{
+    setLoading(true);
     const get=async()=>{
       try {
        let x=`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Palestine`;
@@ -28,6 +39,8 @@ function App() {
            return ;
        }
        setTimes(data.data.timings);
+       setLoading(false);
+       
       } catch (error) {
        console.log(error); 
       }
@@ -36,9 +49,12 @@ function App() {
   },[city])
   return (
     <div className='main'>
+    <div className='loadingScreen' ref={Control}>
+      <img src={loadingIcon} />
+    </div>
     <div className="nav">
       <div className="icon">
-        <MenuIcon />
+        <img src={MenuIcon}/>
       </div>
       <div className="date">{date}</div>
       <div className="slide">

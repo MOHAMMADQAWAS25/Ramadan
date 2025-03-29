@@ -113,6 +113,19 @@ option{
 .nav{
     display: none;
 }
+.loadingScreen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+    backdrop-filter: blur(50px);
+    z-index: 1;
+
+    
+}
 @media (max-width:1024px) and (min-width:482px){
     .main{
         background-image: url('assets/bgs/ipad.jpg');

@@ -126,6 +126,17 @@ option{
 
     
 }
+.yes{
+    background-color:rgba(0,0,0,0.2);
+    /* color: whitesmoke; */
+    padding: 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+}
+
+.no{
+    display: none;
+}
 @media (max-width:1024px) and (min-width:482px){
     .main{
         background-image: url('assets/bgs/ipad.jpg');
@@ -157,7 +168,7 @@ option{
     .Times{
         height: 100%;
     }
-    .name , .time{
+    .name , .time,.yes{
         font-size: 30px;
     } 
     .nav{

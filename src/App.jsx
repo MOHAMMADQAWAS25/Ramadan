@@ -10,6 +10,17 @@ function App() {
   const [date,setDate]=useState('');
   const [times,setTimes]=useState({});
   const [names,setNames]=useState(["Fajr", "Sunrise", "Dhuhr", "Asr", , "Sunset","Maghrib", "Isha"]);
+  const [nextTime,setNextTime]=useState("");
+  const [nextValue,setNextValue]=useState(0);
+  const [EditedTimes,setEditedTimes]=useState({});
+  useEffect(()=>{
+    let counter=setInterval(()=>{
+
+    },1000*60)
+    return ()=>{
+      clearInterval(counter);
+    }
+  })
   useEffect(()=>{
     let x = new Date();
     x=x.toString();
@@ -39,6 +50,12 @@ function App() {
            return ;
        }
        setTimes(data.data.timings);
+       let test1=data.data.timings;
+       let test={};
+       names.forEach((value)=>{
+        test[value]=test1[value]+":00";
+       })
+       setEditedTimes({...test});
        setLoading(false);
        
       } catch (error) {
@@ -47,6 +64,77 @@ function App() {
     }
     get();
   },[city])
+  //I mean here
+  useEffect(()=>{
+    let enter=false;
+    let cho;
+    let cho2;
+        for(let i = 0; i < names.length; i++){
+        let y = new Date();y=y.toString();y=y.split(' ');     
+        let value=names[i];
+        let x = EditedTimes[value];
+        if(y[4]<x){
+          console.log(value);
+          setNextTime(value);
+          enter=true;
+          cho=x;
+          cho2=y[4];
+          break;
+         }
+        }
+        if(!enter){
+          setNextTime('Fajr');
+        }
+        let time1=new Date(`2025-04-22T${cho2}`);
+        let time2=new Date(`2025-04-22T${cho}`);
+        let differenceInMilliseconds = time2 - time1;
+
+        let differenceInSeconds = differenceInMilliseconds / 1000;
+
+        let hours = Math.floor(differenceInSeconds / 3600);  
+        let minutes = Math.floor((differenceInSeconds % 3600) / 60);  
+        let seconds = Math.floor(differenceInSeconds % 60);
+        let formattedTimeDifference = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        setNextValue(formattedTimeDifference);
+        console.log(`Time Difference: ${formattedTimeDifference}`);
+   let counter=setInterval(()=>{
+    let enter=false;
+    let cho;
+    let cho2;
+        for(let i = 0; i < names.length; i++){
+        let y = new Date();y=y.toString();y=y.split(' ');     
+        let value=names[i];
+        let x = EditedTimes[value];
+        if(y[4]<x){
+          console.log(value);
+          setNextTime(value);
+          enter=true;
+          cho=x;
+          cho2=y[4];
+          break;
+         }
+        }
+        if(!enter){
+          setNextTime('Fajr');
+        }
+        let time1=new Date(`2025-04-22T${cho2}`);
+        let time2=new Date(`2025-04-22T${cho}`);
+        let differenceInMilliseconds = time2 - time1;
+
+        let differenceInSeconds = differenceInMilliseconds / 1000;
+
+        let hours = Math.floor(differenceInSeconds / 3600);  
+        let minutes = Math.floor((differenceInSeconds % 3600) / 60);  
+        let seconds = Math.floor(differenceInSeconds % 60);
+        let formattedTimeDifference = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        setNextValue(formattedTimeDifference);
+        console.log(`Time Difference: ${formattedTimeDifference}`);
+
+    },1000);
+    return ()=>{
+      clearInterval(counter);
+    }
+  },[EditedTimes])
   return (
     <div className='main'>
     <div className='loadingScreen' ref={Control}>
@@ -87,7 +175,12 @@ function App() {
             <div className="Times">
               {
                 names.map((value,index)=>{
-                  return <Card key={index} name={value} time={times[value]}/>
+                  if(value!=nextTime)
+                  {return <Card key={index} name={value} time={times[value]} classNamE={'no'} vv={0}/>}
+                  else{
+                    return <Card key={index} name={value} time={times[value]} classNamE={'yes'} vv={nextValue}/> 
+                  }
+                  
                 })
               }
             </div>

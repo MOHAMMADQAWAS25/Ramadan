@@ -9,7 +9,7 @@ function App() {
   const [city,setCity]=useState('Hebron');
   const [date,setDate]=useState('');
   const [times,setTimes]=useState({});
-  const [names,setNames]=useState(["Fajr", "Sunrise", "Dhuhr", "Asr", , "Sunset","Maghrib", "Isha"]);
+  const [names,setNames]=useState(["Fajr", "Sunrise", "Dhuhr", "Asr", "Sunset","Maghrib", "Isha"]);
   const [nextTime,setNextTime]=useState("");
   const [nextValue,setNextValue]=useState(0);
   const [EditedTimes,setEditedTimes]=useState({});
@@ -69,10 +69,17 @@ function App() {
     let enter=false;
     let cho;
     let cho2;
+    let x;
+    let y;     
         for(let i = 0; i < names.length; i++){
-        let y = new Date();y=y.toString();y=y.split(' ');     
         let value=names[i];
-        let x = EditedTimes[value];
+        x=EditedTimes[value];
+        y = new Date();y=y.toString();y=y.split(' ');     
+        console.log("--------------------------");
+        console.log(y[4]);
+        console.log(x);
+        console.log(value);
+        console.log("--------------------------");
         if(y[4]<x){
           console.log(value);
           setNextTime(value);
@@ -84,16 +91,22 @@ function App() {
         }
         if(!enter){
           setNextTime('Fajr');
+          cho2=y[4];
+          cho=EditedTimes['Fajr'];
         }
         let time1=new Date(`2025-04-22T${cho2}`);
         let time2=new Date(`2025-04-22T${cho}`);
         let differenceInMilliseconds = time2 - time1;
-
         let differenceInSeconds = differenceInMilliseconds / 1000;
 
         let hours = Math.floor(differenceInSeconds / 3600);  
-        let minutes = Math.floor((differenceInSeconds % 3600) / 60);  
+        let minutes = Math.floor((differenceInSeconds % 3600) / 60); 
         let seconds = Math.floor(differenceInSeconds % 60);
+        if(!enter){
+          hours+=24;
+          minutes+=60;
+          seconds+=60;
+        }
         let formattedTimeDifference = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         setNextValue(formattedTimeDifference);
         console.log(`Time Difference: ${formattedTimeDifference}`);
@@ -102,9 +115,9 @@ function App() {
     let cho;
     let cho2;
         for(let i = 0; i < names.length; i++){
-        let y = new Date();y=y.toString();y=y.split(' ');     
+        y = new Date();y=y.toString();y=y.split(' ');     
         let value=names[i];
-        let x = EditedTimes[value];
+        x = EditedTimes[value];
         if(y[4]<x){
           console.log(value);
           setNextTime(value);
@@ -116,7 +129,13 @@ function App() {
         }
         if(!enter){
           setNextTime('Fajr');
+          cho2=y[4];
+          cho=EditedTimes['Fajr'];
         }
+        console.log("---------------");
+        console.log(cho);
+        console.log(cho2);
+        console.log("---------------");
         let time1=new Date(`2025-04-22T${cho2}`);
         let time2=new Date(`2025-04-22T${cho}`);
         let differenceInMilliseconds = time2 - time1;
@@ -126,6 +145,11 @@ function App() {
         let hours = Math.floor(differenceInSeconds / 3600);  
         let minutes = Math.floor((differenceInSeconds % 3600) / 60);  
         let seconds = Math.floor(differenceInSeconds % 60);
+        if(!enter){
+          hours+=24;
+          minutes+=60;
+          seconds+=60;
+        }
         let formattedTimeDifference = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         setNextValue(formattedTimeDifference);
         console.log(`Time Difference: ${formattedTimeDifference}`);
